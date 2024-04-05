@@ -1,11 +1,8 @@
-import { Query } from "mongoose";
 
 const transactionResolver={
-    Query:{
-
-    },
-    Mutation:{
-        
-    }
+    Query: {
+       
+      },
+      Mutation: {},
 }
-export default transactionResolver
+export default transactionResolver;
