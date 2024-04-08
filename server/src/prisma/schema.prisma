@@ -12,3 +12,36 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+model User{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  name String
+  password String
+  profileImage String?
+  gender String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  transaction Transaction[]
+}
+
+model Transaction{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  desc String
+  paymentType Payment @default(CASH)
+  category Category @default(SAVINGS)
+  createdAt DateTime @default(now())
+  amount Float
+  user User @relation(fields: [userId], references: [id])
+
+}
+
+enum Payment{
+  CASH
+  CARD
+}
+enum Category{
+  SAVINGS
+  EXPENSE
+  INVESTMENT
+}

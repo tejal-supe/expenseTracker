@@ -1,8 +1,9 @@
+import express from "express"
 import { users } from "../dummyData/data";
 
 const userResolver = {
   Query: {
-    users: () => {
+    users: (_:any,d:any,{req,res}:any) => {
       return users;
     },
     //parents, args, context,info
