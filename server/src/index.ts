@@ -12,6 +12,7 @@ import connectMongo from "connect-mongodb-session";
 
 import mergedResolver from "./resolvers/index";
 import mergeTypeDef from "./typeDefs";
+import { configPassport } from "./passport/passportConfig";
 
 interface MyContext {
   token?: string;
@@ -20,6 +21,7 @@ interface MyContext {
 const startServer = async () => {
   const app = express();
   dotenv.config();
+  configPassport();
   const httpServer = http.createServer(app);
 
   const MongoDbStore = connectMongo(session);
