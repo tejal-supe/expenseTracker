@@ -1,4 +1,4 @@
-import express, { Request } from "express"
+import express, { Request, Response } from "express"
 import bcrypt from "bcryptjs"
 
 import { users } from "../dummyData/data";
@@ -14,11 +14,13 @@ type User = {
 }
 
 interface MyContext extends PassportContext<User, Request>{}
+
 const prisma = new PrismaClient();
+
 const userResolver = {
   Query: {
-    users: (_:any,d:any,{req,res}:any) => {
-      return users;
+    authUser: () => {
+      
     },
     //parents, args, context,info
     user:(_:any,userId:any)=>{
@@ -62,16 +64,31 @@ try {
   throw new Error(error.message || "Internal server error");
 }
     },
-    login:async(_:any,{input}:any,context:MyContext)=>{
+    login:async(_:any,{input}:any,context:any)=>{
         try {
           const {username,password} = input;
           if(!username || !password){
             throw new Error("Please enter the details");
           }
-          // const {user} = await context.authenticate("graphql-local",{username,password})
+          const { user } = await context.authenticate("graphql-local", { username, password })
+          await context.login(user);
+          return user;
         } catch (error:any) {
           throw new Error(error.message || "Internal server error")
         }
+    },
+    logOut: async (parent:any,_:any,context:any) => {
+      try {
+        await context.logOut();
+        context.req.session.destroy((err:any) => {
+          if (err) throw err;
+        });
+        context.res.clearCookie("connect.sid")
+        return {message:"Logged out successfully"}
+
+      } catch (error : any) {
+        throw new Error(error.message || "Internal Server Error")
+      }
     }
   },
 };
