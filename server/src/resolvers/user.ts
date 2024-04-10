@@ -57,7 +57,7 @@ try {
   })
   console.log(newUser,'new user');
   await context.login(newUser);
-  return newUser;
+  return newUser; 
 } catch (error:any) {
   throw new Error(error.message || "Internal server error");
 }
