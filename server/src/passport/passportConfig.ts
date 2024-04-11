@@ -9,7 +9,7 @@ declare global {
   namespace Express {
     interface User {
       username: string;
-      _id?: number;
+      id?: string;
     }
   }
 }
@@ -18,7 +18,7 @@ export const configPassport = async () => {
   passport.serializeUser((user: Express.User, done) => {
     console.log(user);
 
-    done(null, user._id);
+    done(null, user.id);
   });
   passport.deserializeUser(async (id: string, done) => {
     try {

@@ -24,7 +24,6 @@ input CreateTransactionInput{
     paymentType:String!
     category:String!
     desc:String!
-    createdAt:String!
 }
 input UpdateTransaction{
     transactionId:ID!
