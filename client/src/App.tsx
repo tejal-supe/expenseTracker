@@ -3,6 +3,7 @@ import { IoMoon, IoSunny } from "react-icons/io5";
 
 import Header from "./components/ui/Header";
 import { useState } from "react";
+import Navigator from "./navigator";
 
 function App() {
       // const [dark, setDark] = useState<boolean>(true);
@@ -28,6 +29,7 @@ function App() {
           )}
         </button>
       </div> */}
+      <Navigator />
     </div>
   );
 }
