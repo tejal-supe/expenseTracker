@@ -2,6 +2,7 @@ import React, { FormEventHandler, useState } from 'react'
 import toast from "react-hot-toast";
 import TextField from '../../components/TextField';
 import RadioButton from '../../components/RadioButton';
+import { Link } from 'react-router-dom';
 // import {useMutataion} from "@apollo/client"
 
 type userStateType ={
@@ -26,7 +27,7 @@ const SignUp = () => {
       }
       
   }
-const handleSubmit = (e:any) =>{
+const handleSubmit = (e:React.SyntheticEvent) =>{
   e.preventDefault();
   alert("hi")
   console.log('hihihihi',userData);
@@ -65,7 +66,14 @@ const handleSubmit = (e:any) =>{
               Submit
             </button>
             </form>
-
+            <div className='mt-4 text-sm text-gray-600 text-center'>
+							<p>
+								Already have an account?{" "}
+								<Link to='/signin' className='text-black hover:underline'>
+									Login here
+								</Link>
+							</p>
+						</div>
           </div>
         </div>
 
