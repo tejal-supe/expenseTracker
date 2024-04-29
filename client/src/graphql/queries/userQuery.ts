@@ -1,10 +1,12 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-const getAuthenticatedUser = gql`
-  query Det {
-    dogs {
-      id
-      breed
+export const getAuthenticatedUser = gql`
+  query GetAuthUser {
+    authUser {
+      _id
+      name
+      username
+      profileImage
     }
   }
-`;  
+`;
